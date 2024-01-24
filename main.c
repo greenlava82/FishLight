@@ -52,7 +52,7 @@
 #define TIME_SUNRISE        18000ul
 #define TIME_SUNSET         18000ul
 #define TIME_DAYLIGHT       432000ul
-#define TIME_EVENING        72000ul
+#define TIME_EVENING        216000ul
 #define TIME_NIGHT          (TIME_FULL_CYCLE - TIME_SUNRISE - TIME_SUNSET - TIME_DAYLIGHT - TIME_EVENING)
 
 // Fading Math

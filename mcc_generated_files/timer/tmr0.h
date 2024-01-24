@@ -74,30 +74,39 @@ void Timer0_Stop(void);
 
 /**
  * @ingroup tmr0
- * @brief Reads the 8-bit from the TMR0L register.
+ * @brief Reads the 16-bit from the TMR0 register.
  * @pre Timer0 should be initialized with Timer0_Initialize() before calling this API.
  * @param None.
- * @return 8-bit data from the TMR0L register.
+ * @return 16-bit data from the TMR0 register.
  */
-uint8_t Timer0_Read(void);
+uint16_t Timer0_Read(void);
 
 /**
  * @ingroup tmr0
- * @brief Writes the 8-bit value to the TMR0L register.
+ * @brief Writes the 16-bit value to the TMR0 register.
  * @pre Timer0 should be initialized with Timer0_Initialize() before calling this API.
- * @param timerVal - 8-bit value to be written to the TMR0L register.
+ * @param timerVal - 16-bit value to be written to the TMR0 register.
  * @return None.
  */
-void Timer0_Write(uint8_t timerVal);
+void Timer0_Write(size_t timerVal);
 
 /**
  * @ingroup tmr0
- * @brief Loads the 8-bit value to the TMR0H register.
+ * @brief Loads the 16-bit value to the TMR0 register.
  * @pre Timer0 should be initialized with Timer0_Initialize() before calling this API.
- * @param periodVal - 8-bit value written to the TMR0H register.
+ * @param None.
  * @return None.
  */
-void Timer0_Reload(size_t periodVal);
+void Timer0_Reload(void);
+
+/**
+ * @ingroup tmr0
+ * @brief Sets the 16-bit period value to global variable timerTMR0ReloadVal16bit.
+ * @pre Timer0 should be initialized with Timer0_Initialize() before calling this API.
+ * @param  periodVal - 16-bit period value.
+ * @return None.
+ */
+void Timer0_PeriodCountSet(size_t periodVal);
 
 /**
  * @ingroup tmr0
