@@ -19,9 +19,11 @@ The programming on this new chip is designed with several states:
  -> Sunrise (30 minute RGB fade-in)
  -> Daylight (12 Hour Full Brightness (actually, 85% in my code)
  -> Sunset (30 Minute RGB Fade out to...)
- -> Twilight (2 hr Blue/Green at 20%
+ -> Twilight (2 hr Blue/Green at 20%)
  -> Nighttime - Light Off until Sunrise
 
 Any of these timers are configurable at compile time by changing the TIME_x defines at the top of main.c.  the system timer runs on a 100ms loop, so time values are *10
+
+Defines for LED_[Color]MAX were added to create a cap on the intensity of each LED color at full brightness.  In the main branch code, RED is capped at 60% of MAX Daylight because it was overpowering in my water that is already tinted brown by bogwood.  Adjust these 3 values based on what is most appealing in your own tank.
 
 Because the PIC16F's internal 32khz oscillator is prone to clock drift, I use an external Wifi outlet with a schedule to turn might light on each morning, and off at night.  This allows the Sunrise to occur at the same time every morning
