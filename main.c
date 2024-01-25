@@ -47,6 +47,10 @@
 #define LED_MAX_VAL         1.0f
 #define LED_DAYLIGHT_VAL    0.85f
 
+#define LED_REDMAX          (0.60f*PWM_PERIOD)
+#define LED_GREENMAX        (LED_DAYLIGHT_VAL*PWM_PERIOD)
+#define LED_BLUEMAX         (LED_DAYLIGHT_VAL*PWM_PERIOD)
+
 // Time Values
 #define TIME_FULL_CYCLE     864000ul
 #define TIME_SUNRISE        18000ul
@@ -106,21 +110,21 @@ uint8_t setDutyCycle(LEDColor_t channel, float value) {
     uint16_t regval = (uint16_t)(value*PWM_PERIOD);
     switch (channel) {
         case LED_BLUE:
-            PWM1_16BIT_SetSlice1Output1DutyCycleRegister(regval);
+            PWM1_16BIT_SetSlice1Output1DutyCycleRegister((regval>LED_BLUEMAX)?LED_BLUEMAX:regval);
             PWM1_16BIT_LoadBufferRegisters();
             break;
         case LED_RED:
-            PWM1_16BIT_SetSlice1Output2DutyCycleRegister(regval);
+            PWM1_16BIT_SetSlice1Output2DutyCycleRegister((regval>LED_REDMAX)?LED_REDMAX:regval);
             PWM1_16BIT_LoadBufferRegisters();
             break;
         case LED_GREEN:
-            PWM2_16BIT_SetSlice1Output1DutyCycleRegister(regval);
+            PWM2_16BIT_SetSlice1Output1DutyCycleRegister((regval>LED_GREENMAX)?LED_GREENMAX:regval);
             PWM2_16BIT_LoadBufferRegisters();
             break;
         case LED_ALL:
-            PWM1_16BIT_SetSlice1Output1DutyCycleRegister(regval);
-            PWM1_16BIT_SetSlice1Output2DutyCycleRegister(regval);
-            PWM2_16BIT_SetSlice1Output1DutyCycleRegister(regval);
+            PWM1_16BIT_SetSlice1Output1DutyCycleRegister((regval>LED_BLUEMAX)?LED_BLUEMAX:regval);
+            PWM2_16BIT_SetSlice1Output1DutyCycleRegister((regval>LED_GREENMAX)?LED_GREENMAX:regval);
+            PWM1_16BIT_SetSlice1Output2DutyCycleRegister((regval>LED_REDMAX)?LED_REDMAX:regval);
             PWM1_16BIT_LoadBufferRegisters();
             PWM2_16BIT_LoadBufferRegisters();
             break;
